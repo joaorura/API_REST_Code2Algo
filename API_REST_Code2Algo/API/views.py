@@ -1,3 +1,4 @@
+import re
 import subprocess
 
 from rest_framework.response import Response
@@ -27,6 +28,14 @@ class MethodsViewSet(viewsets.ModelViewSet):
         print(request.data)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
+    @staticmethod
+    def process_out(out):
+        value = re.findall("Original name:[^!]*Attention:", out)[0]
+        value = value.replace("Original name:", "")
+        value = value.replace("Attetion:", "")
+        value = value.replace("\t", "")
+        print(value.split("\n"))
+
     def list(self, request, *args, **kwargs):
         if "methods" in request.data:
             methods = request.data["methods"]
@@ -37,8 +46,8 @@ class MethodsViewSet(viewsets.ModelViewSet):
 
                 process = subprocess.Popen(COMMAND, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 out, err = process.communicate()
-                print(str(out))
-                print(str(err))
+                out = out.decode("utf-8")
+                self.process_out(out)
 
             return Response()
         else:
