@@ -3,3 +3,5 @@ django
 djangorestframework
 mongoengine
 django-rest-framework-mongoengine
+tensorflow
+numpy

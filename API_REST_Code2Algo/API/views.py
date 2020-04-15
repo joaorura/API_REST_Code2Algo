@@ -1,42 +1,45 @@
+import subprocess
+
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_mongoengine import viewsets
 
 from .models import Methods
-from .serializer import LogicQuestionSerializer
+from .serializer import MethodsSerializer
 
 
+INPUT_FILE = "/home/joaorura/PycharmProjects/API_REST_Code2Algo/external_projects/code2vec/Input.java"
+COMMAND = [
+    "python3",
+    "/home/joaorura/PycharmProjects/API_REST_Code2Algo/external_projects/code2vec/code2vec.py",
+    "--load", "/home/joaorura/PycharmProjects/API_REST_Code2Algo/external_projects/code2vec/models/theModel",
+    "--predict"
+]
 
-class LogicQuestionViewSet(viewsets.ModelViewSet):
+
+class MethodsViewSet(viewsets.ModelViewSet):
     lookup_field = "id"
-    queryset = LogicQuestion.objects.all()
-    serializer_class = LogicQuestionSerializer
+    queryset = Methods.objects.all()
+    serializer_class = MethodsSerializer
 
     @staticmethod
     def error_message(request):
         print(request.data)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    def create(self, request, *args, **kwargs):
-        try:
-            if request.data == {}:
-                list_of_questions = []
-                for i in range(0, 7):
-                    question = list(LogicQuestion.objects.filter(level=i))
-                    if len(question) == 0:
-                        return Response("Problem In Database", status=status.HTTP_404_NOT_FOUND)
+    def list(self, request, *args, **kwargs):
+        if "methods" in request.data:
+            methods = request.data["methods"]
 
-                    question = sample(question, k=NQPL)
-                    for j in question:
-                        logic_question_data = copy(LogicQuestionSerializer(j).data)
-                        del logic_question_data["id"]
-                        list_of_questions.append(logic_question_data)
+            for i in methods:
+                with open(INPUT_FILE, 'w') as file:
+                    file.write("public class Test {\n" + i + "\n}\n")
 
-                return Response(list_of_questions, status=status.HTTP_201_CREATED)
-            elif 'note' in request.data and type(request.data['note']) == int:
-                print(f"Nota do Usuario: {request.data['note']}")
-                return Response()
-            else:
-                return super(LogicQuestionViewSet, self).create(request, args, kwargs)
-        except Exception:
-            return self.error_message(request)
+                process = subprocess.Popen(COMMAND, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                out, err = process.communicate()
+                print(str(out))
+                print(str(err))
+
+            return Response()
+        else:
+            return super(MethodsViewSet, self).list(request, args, kwargs)
