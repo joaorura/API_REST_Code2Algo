@@ -3,8 +3,9 @@ import re
 import subprocess
 
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework_mongoengine import viewsets
+
+from copy import copy
 
 from .models import Methods
 from .serializer import MethodsSerializer
@@ -29,14 +30,18 @@ class MethodsViewSet(viewsets.ModelViewSet):
         count_dict = {}
 
         for out in list_out:
-            value = re.findall("Original name:[^!]*Attention:", out)[0]
+            try:
+                value = re.findall("Original name:[^!]*Attention:", out)[0]
+            except IndexError:
+                return []
+
             value = value.replace("Original name:", "").replace("Attention:", "").replace("\t", "")
             value = value.replace("[", "").replace("]", "").replace("'", "").replace(", ", "")
             value = value.split("\n")
 
             original_name = value[0].replace("|", "")
             del value[0]
-    
+
             for i in range(0, len(value)):
                 actual = value[i]
                 if actual == "":
@@ -81,14 +86,17 @@ class MethodsViewSet(viewsets.ModelViewSet):
 
             methods_list = []
             for i in answer:
-                answer_methods = list(Methods.objects.filter(method_name=i))
+                method = i.replace('\n', '').replace(' ', "\n")
+                answer_methods = list(Methods.objects.filter(method_name=method))
+
                 if len(answer_methods) == 0:
                     continue
 
                 sorted_element = random.choice(answer_methods)
+                sorted_element = copy(MethodsSerializer(sorted_element).data)
+                del sorted_element['id']
                 methods_list.append(sorted_element)
 
-            answer_dict = {"methods_list": methods_list}
-            return Response(answer_dict)
+            return Response(methods_list)
         else:
             return super(MethodsViewSet, self).create(request, args, kwargs)

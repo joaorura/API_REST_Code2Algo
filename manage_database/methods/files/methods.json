@@ -1,0 +1,290 @@
+[
+    {
+        "method_name": "selectionsort",
+        "method_code": "public class selectionsort{\t\n    public static void selectionSort(int[] arr){  \n            for (int i = 0; i < arr.length - 1; i++){  \n                int index = i;  \n                for (int j = i + 1; j < arr.length; j++){  \n                    if (arr[j] < arr[index]){  \n                        index = j;\n                    }  \n                }  \n                int smallerNumber = arr[index];   \n                arr[index] = arr[i];  \n                arr[i] = smallerNumber;  \n            }  \n    } \n}"
+    },
+    {
+        "method_name": "quicksort",
+        "method_code": "public class quicksort{\t\n\tpublic static void quickSort(int v[], int esquerda, int direita) {\n\t\tint esq = esquerda;\n\t\tint dir = direita;\n\t\tint pivo = v[(esq + dir) / 2];\n\t\tint troca;\n\n\t\twhile (esq <= dir) {\n\t\t\twhile (v[esq] < pivo) {\n\t\t\t\tesq = esq + 1;\n\t\t\t}\n\t\t\twhile (v[dir] > pivo) {\n\t\t\t\tdir = dir - 1;\n\t\t\t}\n\t\t\tif (esq <= dir) {\n\t\t\t\ttroca = v[esq];\n\t\t\t\tv[esq] = v[dir];\n\t\t\t\tv[dir] = troca;\n\t\t\t\tesq = esq + 1;\n\t\t\t\tdir = dir - 1;\n\t\t\t}\n\t\t}\n\t\tif (dir > esquerda){\n\t\t\tquickSort(v, esquerda, dir);\n\t\t}\n\t\tif (esq < direita){\n\t\t\tquickSort(v, esq, direita);\n\t\t}\n\t}\n}"
+    },
+    {
+        "method_name": "cocktailshakersort",
+        "method_code": "public class cocktailshakerSort\n{\n  void cocktailSort(int nums[]){\n\t  boolean swapped;\n\t  do {\n\t\t\tswapped = false;\n\t\t\tfor (int i =0; i<=  nums.length  - 2;i++) {\n\t\t\t\tif (nums[ i ] > nums[ i + 1 ]) {\n\t\t\t\t\tint temp = nums[i];\n\t\t\t\t\tnums[i] = nums[i+1];\n\t\t\t\t\tnums[i+1]=temp;\n\t\t\t\t\tswapped = true;\n\t\t\t\t}\n\t\t\t}\n\t\t\tif (!swapped) {\n\t\t\t\tbreak;\n\t\t\t}\n\t\t\tswapped = false;\n\t\t\tfor (int i= nums.length - 2;i>=0;i--) {\n\t\t\t\tif (nums[ i ] > nums[ i + 1 ]) {\n\t\t\t\t\tint temp = nums[i];\n\t\t\t\t\tnums[i] = nums[i+1];\n\t\t\t\t\tnums[i+1]=temp;\n\t\t\t\t\tswapped = true;\n\t\t\t\t}\n\t\t\t}\n\t\t} while (swapped);\n\t}\n}"
+    },
+    {
+        "method_name": "interpolationsearch",
+        "method_code": "public class interpolationsearch{    \n    public int interpolationSearch(int[] data, int item) {\n    \n    int highEnd = (data.length - 1);\n    int lowEnd = 0;\n\n    while (item >= data[lowEnd] && item <= data[highEnd] && lowEnd <= highEnd) {\n\n        int probe\n            = lowEnd + (highEnd - lowEnd) * (item - data[lowEnd]) / (data[highEnd] - data[lowEnd]);\n\n        if (highEnd == lowEnd) {\n            if (data[lowEnd] == item) {\n                return lowEnd;\n            } else {\n                return -1;\n            }\n        }\n\n        if (data[probe] == item) {\n            return probe;\n        }\n\n        if (data[probe] < item) {\n            lowEnd = probe + 1;\n        } else {\n            highEnd = probe - 1;\n        }\n    }\n    return -1;\n    }\n}"
+    },
+    {
+        "method_name": "bubblesort",
+        "method_code": "public class bubblesort {\n \n    public void bubbleSort(int v[]) {\n \n        for (int i = v.length; i >= 1; i--) {\n            for (int j = 1; j < i; j++) {\n                if (v[j - 1] > v[j]) {\n                    int aux = v[j];\n                    v[j] = v[j - 1];\n                    v[j - 1] = aux;\n                }\n            }\n        }\n    }\n}\n"
+    },
+    {
+        "method_name": "mergesort",
+        "method_code": "class mergesort { \n    void merge(int arr[], int l, int m, int r){ \n \n        int n1 = m - l + 1; \n        int n2 = r - m; \n  \n        int L[] = new int [n1]; \n        int R[] = new int [n2]; \n  \n        for (int i=0; i<n1; ++i) \n            L[i] = arr[l + i]; \n        for (int j=0; j<n2; ++j) \n            R[j] = arr[m + 1+ j]; \n  \n        int i = 0, j = 0; \n  \n        int k = l; \n        while (i < n1 && j < n2) \n        { \n            if (L[i] <= R[j]) \n            { \n                arr[k] = L[i]; \n                i++; \n            } \n            else\n            { \n                arr[k] = R[j]; \n                j++; \n            } \n            k++; \n        } \n  \n        while (i < n1) \n        { \n            arr[k] = L[i]; \n            i++; \n            k++; \n        } \n  \n        while (j < n2) \n        { \n            arr[k] = R[j]; \n            j++; \n            k++; \n        } \n    } \n  \n    void sort(int arr[], int l, int r) \n    { \n        if (l < r) \n        { \n            int m = (l+r)/2; \n  \n            sort(arr, l, m); \n            sort(arr , m+1, r); \n  \n            merge(arr, l, m, r); \n        } \n    }\n  }"
+    },
+    {
+        "method_name": "jumpsearch",
+        "method_code": "public class jumpesearch{\t\n\tpublic static int jump_search(int[] arr, int item){\n\t\t\t\t\t\t\n\t\tint array_size = arr.length;\n\t\tint block_size = (int)Math.floor(Math.sqrt(array_size));\n\t\tint prev = 0;\n\t\twhile (arr[Math.min(block_size, array_size)-1] < item){\n\t\t\tprev = block_size;\n\t\t\tblock_size += (int)Math.floor(Math.sqrt(array_size));\n\t\t\tif (prev >= array_size)\n\t\t\t\treturn -1;\n\t\t}\n\t\twhile (arr[prev] < item){\n\t\t\tprev++;\n\t\t\tif (prev == Math.min(block_size, array_size))\n\t\t\t\treturn -1;\n\t\t\t}\n\t\t\tif (arr[prev] == item)\n\t\t\t\treturn prev;\n\t\t\treturn -1;\n\t}\n}"
+    },
+    {
+        "method_name": "matrixchainmultiplication",
+        "method_code": "public class matrixchainmultiplication{  \n\n  static int MatrixChainOrder(int p[], int n) { \n    int m[][] = new int[n][n]; \n    int i, j, k, L, q; \n\n    for (i = 1; i < n; i++) \n      m[i][i] = 0; \n    \n    for (L = 2; L < n; L++) { \n      for (i = 1; i < n - L + 1; i++) { \n        j = i + L - 1; \n        if (j == n) \n          continue; \n        m[i][j] = Integer.MAX_VALUE; \n        for (k = i; k <= j - 1; k++) { \n          q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j]; \n          if (q < m[i][j]) \n            m[i][j] = q; \n        } \n      } \n    } \n    return m[1][n - 1]; \n  }\n}"
+    },
+    {
+        "method_name": "gnomesort",
+        "method_code": "public class gnomesort{\n\n  public Collection<E> sort(Collection<E> vector) {\n\n      int i = 1;\n      List<E> result = new ArrayList<E>(vector);\n\n      while (i < result.size()) {\n\n          if (i == 0 || result.get(i - 1).compareTo(result.get(i))<= 0) {\n              i++;\n          } else {\n              E temp = result.get(i - 1);\n\n              result.set(i - 1, result.get(i));\n\n              result.set(i, temp);\n              i--;\n          }\n      }\n\n      return result;\n  }\n}"
+    },
+    {
+        "method_name": "cocktailshakersort",
+        "method_code": "public class cocktailshakersort{    \n    private static void cocktail(int[] vetor)\n    {\n        int tamanho, inicio, fim, swap, aux;\n        tamanho = 10; \n        inicio = 0;\n        fim = tamanho - 1;\n        swap = 0;\n        while (swap == 0 && inicio < fim)\n        {\n            swap = 1;\n            for (int i = inicio; i < fim; i = i + 1)\n            {\n                if (vetor[i] > vetor[i + 1])\n                {\n                    aux = vetor[i];\n                    vetor[i] = vetor[i + 1];\n                    vetor[i + 1] = aux;\n                    swap = 0;\n                }\n            }\n            fim = fim - 1;\n            for (int i = fim; i > inicio; i = i - 1)\n            {\n                if (vetor[i] < vetor[i - 1])\n                {\n                    aux = vetor[i];\n                    vetor[i] = vetor[i - 1];\n                    vetor[i - 1] = aux;\n                    swap = 0;\n                }\n            }\n            inicio = inicio + 1;\n        }\n    }\n}"
+    },
+    {
+        "method_name": "binarysearch",
+        "method_code": "public class binarysearch {\t\n\tprivate static int buscaBinariaRecursiva(int[] array, int menor, int maior,\n\t\t\tint chave) {\n\t\tint media = (maior + menor) / 2;\n\t\tint valorMeio = array[media];\n\n\t\tif (menor > maior)\n\t\t\treturn -1;\n\t\telse if(valorMeio == chave) \n\t\t\treturn media;\n\t\telse if (valorMeio < chave)\n\t\t\treturn buscaBinariaRecursiva(array, media+1, maior, chave);\n\t\telse\n\t\t\treturn buscaBinariaRecursiva(array, menor, media-1, chave);\n\t}\n}"
+    },
+    {
+        "method_name": "shellsort",
+        "method_code": "public class shellsort {\n\n\tpublic static void ordenar(int[] vet){\n\t    int i , j , temp, size = vet.length;\n\t    \n\t    int incremento = 1;\n\t    while(incremento < size) {\n\t        incremento = 3 * incremento + 1;\n\t    }\n\t     \n\t    while (incremento > 1) {\n\t        incremento /= 3;\n\t        \n\t        for(i = incremento; i < size; i++) {\n\t            temp = vet[i];\n\t            j = i - incremento;\n\t            while (j >= 0 && temp < vet[j]) {\n\t                vet[j + incremento] = vet[j];\n\t                j -= incremento;\n\t            }\n\t            vet [j + incremento] = temp;\n\t        }\n\t    }\t    \n\t}\t\n}"
+    },
+    {
+        "method_name": "pancakesort",
+        "method_code": "public class pancakesort{\n   int[] heap;\n \n   public String toString() {\n      String info = \"\";\n      for (int x: heap)\n         info += x + \" \";\n      return info;\n   }\n \n   public void flip(int n) {\n      for (int i = 0; i < (n+1) / 2; ++i) {\n         int tmp = heap[i];\n         heap[i] = heap[n-i];\n         heap[n-i] = tmp;\n      }      \n   }\n \n   public int[] minmax(int n) {\n      int xm, xM;\n      xm = xM = heap[0];\n      int posm = 0, posM = 0;\n \n      for (int i = 1; i < n; ++i) {\n         if (heap[i] < xm) {\n            xm = heap[i];\n            posm = i;\n         }\n         else if (heap[i] > xM) {\n            xM = heap[i];\n            posM = i;\n         }\n      }\n      return new int[] {posm, posM};\n   }\n \n   public void sort(int n, int dir) {\n      if (n == 0) return;\n \n      int[] mM = minmax(n);\n      int bestXPos = mM[dir];\n      int altXPos = mM[1-dir];\n      boolean flipped = false;\n \n      if (bestXPos == n-1) {\n         --n;\n      }\n      else if (bestXPos == 0) {\n         flip(n-1);\n         --n;\n      }\n      else if (altXPos == n-1) {\n         dir = 1-dir;\n         --n;\n         flipped = true;\n      }\n      else {\n         flip(bestXPos);      }\n      sort(n, dir);\n \n      if (flipped) {\n         flip(n);\n      }\n   }\n \n   PancakeSort(int[] numbers) {\n      heap = numbers;\n      sort(numbers.length, 1);\n   }\n  } "
+    },
+    {
+        "method_name": "topologicalsort",
+        "method_code": "public class topologicalsort { \n\tStack<Node> stack;\n \n\tpublic TopologicalSort() {\n\t\tstack=new Stack<>();\n\t}\n\tstatic class Node\n\t{\n\t\tint data;\n\t\tboolean visited;\n\t\tList<Node> neighbours;\n \n\t\tNode(int data)\n\t\t{\n\t\t\tthis.data=data;\n\t\t\tthis.neighbours=new ArrayList<>();\n \n\t\t}\n\t\tpublic void addneighbours(Node neighbourNode)\n\t\t{\n\t\t\tthis.neighbours.add(neighbourNode);\n\t\t}\n\t\tpublic List<Node> getNeighbours() {\n\t\t\treturn neighbours;\n\t\t}\n\t\tpublic void setNeighbours(List<Node> neighbours) {\n\t\t\tthis.neighbours = neighbours;\n\t\t}\n\t\tpublic String toString()\n\t\t{\n\t\t\treturn \"\"+data;\n\t\t}\n\t}\n \n\tpublic  void toplogicalSort(Node node)\n\t{\n\t\tList<Node> neighbours=node.getNeighbours();\n\t\tfor (int i = 0; i < neighbours.size(); i++) {\n\t\t\tNode n=neighbours.get(i);\n\t\t\tif(n!=null && !n.visited)\n\t\t\t{\n\t\t\t\ttoplogicalSort(n);\n\t\t\t\tn.visited=true;\n\t\t\t}\n\t\t}\n\t\tstack.push(node);\n  }\n}"
+    },
+    {
+        "method_name": "kadanealgorithm",
+        "method_code": "public class kadanealgorithm {\n\t\n\tstatic int largestContiguousSum(int arr[]){\n\t\tint i,len=arr.length,cursum=0,maxsum=Integer.MIN_VALUE;\n\t\tif(len==0)\n\t\t\treturn 0;\n\t\tfor(i=0;i<len;i++){\n\t\t\tcursum+=arr[i];\n\t\t\tif(cursum>maxsum){\n\t\t\t\tmaxsum=cursum;\n\t\t\t}\n\t\t\tif(cursum<=0){\n\t\t\t\tcursum=0;\n\t\t\t}\n\t\t}\n\t\treturn maxsum;\n  }\n}"
+    },
+    {
+        "method_name": "hamiltoniancycle",
+        "method_code": "public class hamiltoniancycle {\n  int verticesNum;\n  char[] vertices;\n  char[] path;\n  int size;\n  Map<Character,Integer> vertexIndexMap = new HashMap<>();\n  public HamiltonianCycle(int verticesNum) {\n      this.verticesNum = verticesNum;\n      vertices = new char[verticesNum];\n      path = new char[verticesNum];\n  }\n\n  public void addVertex(char v) {\n      vertexIndexMap.put(v, size);\n      vertices[size++] = v;\n  }\n\n  private boolean isValidNodeInPath(int [][] graph, int indexOfNewVerex ,int pos) {\n      char lastVertexInPath = path[pos-1];\n      int indexOfLastVertexInPath = vertexIndexMap.get(lastVertexInPath);\n      if(graph[indexOfNewVerex][indexOfLastVertexInPath] == 0){\n          return false;\n      }\n      for(int i = 0; i < pos; i++){ \n          if(vertices[indexOfNewVerex] == path[i]){\n              return false;\n          }\n      }\n      return true;\n  }\n\n  private boolean validateHamiltonianCycleUtil(int [][] graph, int pos){\n      // base condition\n      if(pos == verticesNum){\n          char lastVertexInPath = path[pos-1];\n          int indexOfVertexlastInPath = vertexIndexMap.get(lastVertexInPath);\n          if(graph[0][indexOfVertexlastInPath] == 1){\n              return true;\n          }\n          else {\n              return false;\n          }\n      }\n      for(int i = 1; i < verticesNum; i++){\n          if(isValidNodeInPath(graph,i,pos)){\n              path[pos] = vertices[i];\n              if(validateHamiltonianCycleUtil(graph, pos+1)){\n                  return true;\n              }\n              path[pos] = '$';\n          }\n      }\n      \n      return false;\n  }\n\n  public boolean isHamiltonianCycle(int[][] graph) {\n      for (int i = 0; i < verticesNum; i++) {\n          path[i] = '$';\n      }\n      path[0] = vertices[0]; \n      if (validateHamiltonianCycleUtil(graph, 1)) {\n          \n          System.out.println(\"Path exists::\");\n          for(int i = 0 ; i < verticesNum; i++){\n              System.out.print(path[i]+\" \");\n          }\n          System.out.print(path[0]);\n          return true;\n      }\n      System.out.println(\"No path exists!!\");\n      return false;\n  }\n}"
+    },
+    {
+        "method_name": "insertionsort",
+        "method_code": "public class insertionsort{    \n    public static void insertionSort(int array[]) {  \n        int n = array.length;  \n        for (int j = 1; j < n; j++) {  \n            int key = array[j];  \n            int i = j-1;  \n            while ( (i > -1) && ( array [i] > key ) ) {  \n                array [i+1] = array [i];  \n                i--;  \n            }  \n            array[i+1] = key;  \n        }  \n    }  \n}"
+    },
+    {
+        "method_name": "radixsort",
+        "method_code": "public class radixsort{  \n  public void radixSort(int vector[]){\n    for(int digit = 0; digit < 3; digit ++){\n      int power = (int) Math.pow(10, digit+1);\n      \n      int z[][] = new int[vector.length][10];\n      int n[] = new int[10];\n\n      for(int i = 0; i < vector.length; i ++){\n        int num = vector[i];\n        z[n[(num%power)/(power/10)]][(num%power)/(power/10)] = num;\n        n[(num%power)/(power/10)]++;\n        \n      }\n      int c = 0;\n      for(int i = 0; i < 10; i ++){\n        \n        for(int j = 0; j < vector.length; j ++){\n          if(j < n[i]){\n            vector[c] = z[j][i];\n            c++;\n          }else{break;}\n        }\n      }\n      \n    }\n  }\n}"
+    },
+    {
+        "method_name": "interpolationsearch",
+        "method_code": "public class interpolationsearch{    \n    static int interpolationSearch(int x) { \n        int lo = 0, hi = (arr.length - 1); \n\n        while (lo <= hi && x >= arr[lo] && x <= arr[hi]) {         \n            if (lo == hi) { \n                if (arr[lo] == x) return lo; \n                    return -1; \n            } \n            int pos = lo + (((hi-lo) / (arr[hi]-arr[lo]))*(x - arr[lo])); \n            if (arr[pos] == x) \n                return pos; \n\n            if (arr[pos] < x) \n                lo = pos + 1; \n            else\n                hi = pos - 1; \n        } \n        return -1; \n    } \n}"
+    },
+    {
+        "method_name": "mergesort",
+        "method_code": "public class mergesort{\n    public static void mergeSort(int[] array, int low, int high) {\n        if (high <= low) return;\n\n        int mid = (low+high)/2;\n        mergeSort(array, low, mid);\n        mergeSort(array, mid+1, high);\n        merge(array, low, mid, high);\n    }\n\n    public static void merge(int[] array, int low, int mid, int high) {\n        int leftArray[] = new int[mid - low + 1];\n        int rightArray[] = new int[high - mid];\n\n        for (int i = 0; i < leftArray.length; i++)\n            leftArray[i] = array[low + i];\n        for (int i = 0; i < rightArray.length; i++)\n            rightArray[i] = array[mid + i + 1];\n\n        int leftIndex = 0;\n        int rightIndex = 0;\n\n        for (int i = low; i < high + 1; i++) {\n            if (leftIndex < leftArray.length && rightIndex < rightArray.length) {\n                if (leftArray[leftIndex] < rightArray[rightIndex]) {\n                array[i] = leftArray[leftIndex];\n                leftIndex++;\n                } else {\n                    array[i] = rightArray[rightIndex];\n                    rightIndex++;\n                }\n            } else if (leftIndex < leftArray.length) {\n                array[i] = leftArray[leftIndex];\n                leftIndex++;\n            } else if (rightIndex < rightArray.length) {\n                array[i] = rightArray[rightIndex];\n                rightIndex++;\n            }\n        }\n    }\n}"
+    },
+    {
+        "method_name": "selectionsort",
+        "method_code": "public class selectionsort{\t\n\tpublic static void selectionSort(int[] array) {\n\t\tfor (int fixo = 0; fixo < array.length - 1; fixo++) {\n\t\t\tint menor = fixo;\n\t\t\n\t\t\t\t\tfor (int i = menor + 1; i < array.length; i++) {\n\t\t\t\t\t\t\tif (array[i] < array[menor]) {\n\t\t\t\t\t\t\t\t\tmenor = i;\n\t\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\tif (menor != fixo) {\n\t\t\t\t\t\t\tint t = array[fixo];\n\t\t\t\t\t\t\tarray[fixo] = array[menor];\n\t\t\t\t\t\t\tarray[menor] = t;\n\t\t\t\t\t}\n\t\t}\n\t}\n}"
+    },
+    {
+        "method_name": "editdistance",
+        "method_code": "public class editdistance{\n    public int minDistance(String word1, String word2) {\n    int m=word1.length();\n    int n=word2.length();\n    int[][] mem = new int[m][n];\n    for(int[] arr: mem){\n        Arrays.fill(arr, -1);\n    }\n    return calDistance(word1, word2, mem, m-1, n-1);\n    }\n\n    private int calDistance(String word1, String word2, int[][] mem, int i, int j){ \n    if(i<0){\n        return j+1;\n    }else if(j<0){\n        return i+1;\n    }\n\n    if(mem[i][j]!=-1){\n        return mem[i][j];\n    }\n\n    if(word1.charAt(i)==word2.charAt(j)){\n        mem[i][j]=calDistance(word1, word2, mem, i-1, j-1);\n    }else{\n        int prevMin = Math.min(calDistance(word1, word2, mem, i, j-1), calDistance(word1, word2, mem, i-1, j));\n        prevMin = Math.min(prevMin, calDistance(word1, word2, mem, i-1, j-1));\n        mem[i][j]=1+prevMin;\n    }\n\n    return mem[i][j];    \n    }\n}"
+    },
+    {
+        "method_name": "editdistance",
+        "method_code": "public class editdistance{\n\tpublic static int minDistance(String word1, String word2) {\n\t\tint len1 = word1.length();\n\t\tint len2 = word2.length();\n\t\n\t\tint[][] dp = new int[len1 + 1][len2 + 1];\n\t\n\t\tfor (int i = 0; i <= len1; i++) {\n\t\t\tdp[i][0] = i;\n\t\t}\n\t\n\t\tfor (int j = 0; j <= len2; j++) {\n\t\t\tdp[0][j] = j;\n\t\t}\n\t\n\t\tfor (int i = 0; i < len1; i++) {\n\t\t\tchar c1 = word1.charAt(i);\n\t\t\tfor (int j = 0; j < len2; j++) {\n\t\t\t\tchar c2 = word2.charAt(j);\n\t\n\t\t\t\tif (c1 == c2) {\n\t\t\t\t\tdp[i + 1][j + 1] = dp[i][j];\n\t\t\t\t} else {\n\t\t\t\t\tint replace = dp[i][j] + 1;\n\t\t\t\t\tint insert = dp[i][j + 1] + 1;\n\t\t\t\t\tint delete = dp[i + 1][j] + 1;\n\t\n\t\t\t\t\tint min = replace > insert ? insert : replace;\n\t\t\t\t\tmin = delete > min ? min : delete;\n\t\t\t\t\tdp[i + 1][j + 1] = min;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\n\t\treturn dp[len1][len2];\n\t}\n}"
+    },
+    {
+        "method_name": "subsetsum",
+        "method_code": "public class subsetsum { \n  \n  static boolean isSubsetSum(int set[], int n, int sum)  { \n      if (sum == 0) \n          return true; \n      if (n == 0 && sum != 0) \n          return false; \n\n      if (set[n - 1] > sum) \n          return isSubsetSum(set, n - 1, sum); \n\n      return isSubsetSum(set, n - 1, sum) || isSubsetSum(set, n - 1, sum - set[n - 1]); \n  }\n}"
+    },
+    {
+        "method_name": "topologicalsort",
+        "method_code": "public class topologicalsort {\n  void topologicalSortUtil(int v, boolean visited[], Stack stack) { \n    visited[v] = true; \n    Integer i; \n    Iterator<Integer> it = adj[v].iterator(); \n    while (it.hasNext()) { \n      i = it.next(); \n      if (!visited[i]) \n        topologicalSortUtil(i, visited, stack); \n    } \n    \n    stack.push(new Integer(v)); \n  } \n  void topologicalSort() { \n    Stack stack = new Stack(); \n    boolean visited[] = new boolean[V]; \n    for (int i = 0; i < V; i++) \n      visited[i] = false; \n    for (int i = 0; i < V; i++) \n      if (visited[i] == false) \n        topologicalSortUtil(i, visited, stack); \n    while (stack.empty()==false) \n      System.out.print(stack.pop() + \" \"); \n  } \n}"
+    },
+    {
+        "method_name": "hamiltoniancycle",
+        "method_code": "public class hamiltcycle {\n  boolean isSafe(int v, int graph[][], int path[], int pos) { \n    if (graph[path[pos - 1]][v] == 0) \n      return false; \n\n    for (int i = 0; i < pos; i++) \n      if (path[i] == v) \n        return false; \n    \n    return true; \n  } \n\n  boolean hamCycleUtil(int graph[][], int path[], int pos) { \n    if (pos == V) { \n      if (graph[path[pos - 1]][path[0]] == 1) \n        return true; \n      else\n        return false; \n    } \n    for (int v = 1; v < V; v++) { \n      if (isSafe(v, graph, path, pos)) { \n        path[pos] = v; \n        if (hamCycleUtil(graph, path, pos + 1) == true) \n          return true; \n        path[pos] = -1; \n      } \n    } \n    return false; \n  } \n\n  int hamCycle(int graph[][]) { \n    path = new int[V]; \n    for (int i = 0; i < V; i++) \n      path[i] = -1; \n    path[0] = 0; \n    if (hamCycleUtil(graph, path, 1) == false) { \n      System.out.println(\"\\nSolution does not exist\"); \n      return 0; \n    } \n    printSolution(path); \n    return 1; \n  }\n}"
+    },
+    {
+        "method_name": "fibonacci",
+        "method_code": "public class fibonacci {\n  \n  static long fibo(int n) {\n      return (n < 2) ? n : fibo(n - 1) + fibo(n - 2);\n  }\n}"
+    },
+    {
+        "method_name": "fibonacci",
+        "method_code": "public class fibonacci {\n  \n  static long fibo(int n) {\n      int F = 0;     // atual\n      int ant = 0;   // anterior\n\n      for (int i = 1; i <= n; i++) {\n\n          if (i == 1) {\n              F = 1;\n              ant = 0;\n          } else {\n              F += ant;\n              ant = F - ant;\n          }\n\n      }\n\n      return F;\n  }\n}"
+    },
+    {
+        "method_name": "bubblesort",
+        "method_code": "public class bubblesort {\t\n\tpublic static int[] bubbleSort(int vetor[]){\n\t\tint trocas = 0;\n\t\tfor (int i = 0; i < vetor.length-1; i++) {\n\t\t\tif(vetor[i] > vetor[i+1]){\n\t\t\t\tint temp = vetor[i];\n\t\t\t\tvetor[i] = vetor[i+1];\n\t\t\t\tvetor[i+1] = temp;\n\t\t\t\ttrocas++;\n\t\t\t}\n\t\t}\n\t\tif(trocas != 0)\n\t\t\tbubbleSort(vetor);\n\t\treturn vetor;\n\t}\n}"
+    },
+    {
+        "method_name": "fibonacci",
+        "method_code": "public class fibonacci {\n  \n  static long fibo(int n) {\n      if (n < 2) {\n          return n;\n      } else {\n          return fibo(n - 1) + fibo(n - 2);\n      }\n  }\n}"
+    },
+    {
+        "method_name": "maxminsort",
+        "method_code": "public class maxminsort {\n\n\tpublic static void sort(int[] a) {\n\t\tint len = a.length;\n\t\tint j = 0;\n\t\tfor (int i=0; i < len; i++) {\n\t\t\tint temp = a[i];\n\t\t\twhile (temp > 0) {\n\t\t\t\tif (i < len / 2)\n\t\t\t\t\tj = 2 * i + 1;\n\t\t\t\telse\n\t\t\t\t\tj = (len - 1 - i) * 2;\n\t\t\t\tif(i==j) {\n\t\t\t\t\ta[i]=-temp;\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tswap(temp, a[j]);\n\t\t\t\ta[j] = -1*a[j];\n\t\t\t\ti=j;\n\t\t\t}\n\t\t}\n\t\tfor (int n : a)\n\t\t\tSystem.out.print(n + \" \");\n\t}\n\t\n\tpublic static void swap(int temp, int a) {\n\t\tint swap = a;\n\t\ttemp = a;\n\t\ta = swap;\n  }\n}"
+    },
+    {
+        "method_name": "coutingsort",
+        "method_code": "public class coutingsort{  \n  public void sort(char arr[]) { \n    int n = arr.length; \n    \n    char output[] = new char[n]; \n    int count[] = new int[256];\n\n    for (int i=0; i<256; ++i){ \n      count[i] = 0; \n    }\n    for (int i=0; i<n; ++i) {\n      ++count[arr[i]]; \n    }\n    for (int i=1; i<=255; ++i){ \n      count[i] += count[i-1]; \n    }\n    for (int i = n-1; i>=0; i--) { \n      output[count[arr[i]]-1] = arr[i]; \n      --count[arr[i]]; \n    } \n    \n    for (int i = 0; i<n; ++i){ \n      arr[i] = output[i]; \n    }\n  }\n}"
+    },
+    {
+        "method_name": "longestincreasingsubsequence",
+        "method_code": "public class longestincreasingsubsequence{    \n    public int lengthOfLIS(int[] nums) {\n    if(nums==null || nums.length==0)\n        return 0;\n\n    int[] max = new int[nums.length];\n    Arrays.fill(max, 1);\n\n    int result = 1;\n    for(int i=0; i<nums.length; i++){\n        for(int j=0; j<i; j++){\n            if(nums[i]>nums[j]){\n                max[i]= Math.max(max[i], max[j]+1);\n\n            }\n        }\n        result = Math.max(max[i], result);\n    }\n\n    return result;\n    }\n}"
+    },
+    {
+        "method_name": "fibonacci",
+        "method_code": "public class fibonacci {    \n \n  private static int[] vetAux = new int[50];\n  private static int k;\n\n  public static long fibo(int n) {      \n           k = 1; \n           return recursao(n);\n         }\n\n  private static long recursao(int n) {\n          if (n < 0) { \n             return vetAux[0];  \n        } else { \n         if (k < 3) {\n            vetAux[n] = k - 1; \n            k++; \n         } else {\n               vetAux[n] = vetAux[n + 1] + vetAux[n + 2]; \n               }\n            return recursao(n - 1);\n         }\n  }\n}"
+    },
+    {
+        "method_name": "insertionsort",
+        "method_code": "public class insertionsort{    \n    void insertionSort(int arr[]){ \n        int n = arr.length; \n        for (int i = 1; i < n; ++i) { \n            int key = arr[i]; \n            int j = i - 1; \n   \n            while (j >= 0 && arr[j] > key) { \n                arr[j + 1] = arr[j]; \n                j = j - 1; \n            } \n            arr[j + 1] = key; \n        } \n    } \n}"
+    },
+    {
+        "method_name": "binarysearch",
+        "method_code": "public class binarysearch {\n    public static boolean Binaria(int x, int dados[]){ \n\n    int n = dados.length;     \n    int aux = 0;     \n        \n    for(int i = 0; i < n-1; i++){   \n        for(int j = i+1 ; j < n; j++){\n            if(dados[i] > dados[j]){   \n                aux = dados[j];     \n                dados[j] = dados[i];     \n                dados[i] = aux;     \n            }     \n        }     \n    }     \n        \n    int meio;     \n    int inicio = 0;     \n    int fim = dados.length-1;     \n    while (inicio <= fim) {     \n            meio = (inicio + fim)/2;     \n            if (x == dados[meio])     \n                        return true;     \n            if (x < dados[meio])     \n                        fim = meio - 1;     \n            else     \n                        inicio = meio + 1;     \n    }     \n    return false;     \n\n    }\n}"
+    },
+    {
+        "method_name": "subsetsum",
+        "method_code": "public class subsetsum {\n\t\n\tpublic static boolean subSetDP(int[] A, int sum) {\n\t\tboolean[][] solution = new boolean[A.length + 1][sum + 1];\t\t\n\t\tfor(int i=1;i<=sum;i++){\n\t\t\tsolution[0][i]=false;\n\t\t}\n\t\t\t\tfor(int i=0;i<=A.length;i++){\n\t\t\t\t\tsolution[i][0]=true;\n\t\t\t\t}\n\t\tfor(int i=1;i<=A.length;i++){\n\t\t\tfor(int j=1;j<=sum;j++){\t\t\t\t\n\t\t\t\tsolution[i][j] = solution[i-1][j];\n\t\t\t\t\n\t\t\t\tif(solution[i][j]==false && j>=A[i-1])\n\t\t\t\t\tsolution[i][j] = solution[i][j] || solution[i-1][j-A[i-1]];\t\t\t\t\n\t\t\t}\n\t\t}\t\t\n\t\treturn solution[A.length][sum];\n  }\n}"
+    },
+    {
+        "method_name": "ternarysearch",
+        "method_code": "public class ternarysearch{    \n    static int ternarySearch(int l, int r, int key, int ar[]) { \n        if (r >= l) { \n  \n            int mid1 = l + (r - l) / 3; \n            int mid2 = r - (r - l) / 3; \n  \n            if (ar[mid1] == key) { \n                return mid1; \n            } \n            if (ar[mid2] == key) { \n                return mid2; \n            } \n  \n            if (key < ar[mid1]) { \n  \n                return ternarySearch(l, mid1 - 1, key, ar); \n            } \n            else if (key > ar[mid2]) { \n  \n                return ternarySearch(mid2 + 1, r, key, ar); \n            } \n            else { \n  \n                return ternarySearch(mid1 + 1, mid2 - 1, key, ar); \n            } \n        } \n  \n        return -1; \n    }\n}"
+    },
+    {
+        "method_name": "longestvalidparenthesis",
+        "method_code": "public class longestvalidparenthesis{\n    public int longestValidParentheses(String s) {\n    Stack<int[]> stack = new Stack<>();\n    int result = 0;\n\n    for(int i=0; i<s.length(); i++){\n        char c = s.charAt(i);\n        if(c==')'){\n            if(!stack.isEmpty() && stack.peek()[0]==0){\n                stack.pop();\n                result = Math.max(result, i-(stack.isEmpty()?-1:stack.peek()[1]));\n            }else{\n                stack.push(new int[]{1, i});\n            }\n        }else{\n            stack.push(new int[]{0, i});\n        }\n    }\n\n    return result;\n    }\n}"
+    },
+    {
+        "method_name": "insertionsort",
+        "method_code": "public class insertionsort{  \n  public static void insertionSort(int[] vetor) {\n    int j;\n    int key;\n    int i;\n      \n    for (j = 1; j < vetor.length; j++){\n      key = vetor[j];\n      for (i = j - 1; (i >= 0) && (vetor[i] > key); i--){\n        vetor[i + 1] = vetor[i];\n      }\n      vetor[i + 1] = key;\n    }\n  }\n}"
+    },
+    {
+        "method_name": "rodcutting",
+        "method_code": "public class rodcutting{\n  static int cutRod(int price[], int n) { \n    if (n <= 0) \n      return 0; \n    int max_val = Integer.MIN_VALUE; \n    \n    for (int i = 0; i < n; i++) \n      max_val = Math.max(max_val, price[i] + cutRod(price, n - i - 1)); \n    return max_val; \n  } \n}"
+    },
+    {
+        "method_name": "longestvalidparenthesis",
+        "method_code": "public class longestvalidparenthesis{  \n  public int longestValidParentheses(String s) {\n    Stack<Integer> stack = new Stack<>();\n    int res = 0;\n    int start = -1;\n    for (int i = 0; i < s.length(); i++) {\n      if (s.charAt(i) == '(') {\n        stack.push(i);\n      } else {\n        if (stack.isEmpty()) {\n          start = i;\n        } else {\n          stack.pop();\n          if (stack.isEmpty()) {\n            res = Math.max(res, i - start);\n          } else {\n            res = Math.max(res, i - stack.peek());\n          }\n        }\n      }\n    }\n    return res;\n  }\n}"
+    },
+    {
+        "method_name": "radixsort",
+        "method_code": "public class radixsort { \n  static int getMax(int arr[], int n) { \n    int mx = arr[0]; \n    for (int i = 1; i < n; i++) \n        if (arr[i] > mx) \n            mx = arr[i]; \n    return mx; \n  } \n\n  static void countSort(int arr[], int n, int exp) { \n    int output[] = new int[n]; \n    int i; \n    int count[] = new int[10]; \n    Arrays.fill(count,0); \n    for (i = 0; i < n; i++) \n        count[ (arr[i]/exp)%10 ]++; \n    for (i = 1; i < 10; i++) \n        count[i] += count[i - 1]; \n    for (i = n - 1; i >= 0; i--) { \n        output[count[ (arr[i]/exp)%10 ] - 1] = arr[i]; \n        count[ (arr[i]/exp)%10 ]--; \n    } \n\n    for (i = 0; i < n; i++) \n        arr[i] = output[i]; \n  } \n\n  static void radixSort(int arr[], int n) { \n      int m = getMax(arr, n); \n\n      for (int exp = 1; m/exp > 0; exp *= 10) \n          countSort(arr, n, exp); \n  } \n}"
+    },
+    {
+        "method_name": "linearsearch",
+        "method_code": "public class linearsearch{\n  public static int search(int arr[], int x) { \n    int n = arr.length; \n    for(int i = 0; i < n; i++) { \n      if(arr[i] == x) \n        return i; \n    } \n    return -1; \n  } \n}"
+    },
+    {
+        "method_name": "rodcutting",
+        "method_code": "public class rodcutting{  \n  static int cutRod(int price[], int n) { \n    int val[] = new int[n + 1]; \n    val[0] = 0; \n\n    for (int i = 1; i <= n; i++) { \n      int max_val = Integer.MIN_VALUE; \n      for (int j = 0; j < i; j++) \n        max_val = Math.max(max_val, price[j] + val[i - j - 1]); \n        val[i] = max_val; \n    } \n    return val[n]; \n  } \n}"
+    },
+    {
+        "method_name": "coutingsort",
+        "method_code": "public class coutingsort{\n  public void CountingSort(Integer[] array, int leftIndex, int rightIndex) {\n      \n    int k = 0;\n    for(int m = leftIndex; m < rightIndex; m++){\n      if(array[m] > k){\n        k = array[m];\n      }\n    }\n    \n    int[] vetorTemporario = new int[k];\n    \n    for(int i = 0; i < vetorTemporario.length; i++){\n      vetorTemporario[i] = 0;\n    }\n    \n    for(int j = leftIndex; j < rightIndex; j++){\n      vetorTemporario[array[j]] += 1;\n    }\n    \n    for(int i = leftIndex; i < k; i++){\n      vetorTemporario[i] = vetorTemporario[i] + vetorTemporario[i - 1];\n    }\n    \n    int[] vetorAuxiliar = new int[array.length];\n    for(int j = rightIndex; j > leftIndex; j--) {\n      vetorAuxiliar[vetorTemporario[array[j]]] = array[j];\n      vetorTemporario[array[j]] -= 1; \n    }\n    \n    for (int i = leftIndex; i < rightIndex; i++){\n      array[i] = vetorAuxiliar[i];\n    }\n  }\n}"
+    },
+    {
+        "method_name": "levenshteindistance",
+        "method_code": "public class levenshteindistance{    \n    static int calculate(String x, String y) {\n    int[][] dp = new int[x.length() + 1][y.length() + 1];\n\n    for (int i = 0; i <= x.length(); i++) {\n        for (int j = 0; j <= y.length(); j++) {\n            if (i == 0) {\n                dp[i][j] = j;\n            }\n            else if (j == 0) {\n                dp[i][j] = i;\n            }\n            else {\n                dp[i][j] = min(dp[i - 1][j - 1] \n                + costOfSubstitution(x.charAt(i - 1), y.charAt(j - 1)), \n                    dp[i - 1][j] + 1, \n                    dp[i][j - 1] + 1);\n            }\n        }\n    }\n\n    return dp[x.length()][y.length()];\n    }\n}"
+    },
+    {
+        "method_name": "kadanealgorithm",
+        "method_code": "public class kadanealgorithm {\n    public static void maxSum(int[] arr) {\n        int current = arr[0];\n        int global_sum = arr[0];\n        \n        for(int i = 1; i < arr.length; i++){\n            current = Math.max(arr[i], arr[i] + current);\n            \n            if(current > global_sum){\n                global_sum = current;\n            }\n        }\n        \n        System.out.println(global_sum);\n    }\n}"
+    },
+    {
+        "method_name": "pancakesort",
+        "method_code": "class pancakesort { \n  \n    static void flip(int arr[], int i) \n    { \n        int temp, start = 0; \n        while (start < i) \n        { \n            temp = arr[start]; \n            arr[start] = arr[i]; \n            arr[i] = temp; \n            start++; \n            i--; \n        } \n    }\n    static int findMax(int arr[], int n) \n    { \n        int mi, i; \n        for (mi = 0, i = 0; i < n; ++i) \n            if (arr[i] > arr[mi]) \n                mi = i; \n        return mi; \n    } \n    static int pancakeSort(int arr[], int n) { \n        for (int curr_size = n; curr_size > 1; --curr_size) { \n            int mi = findMax(arr, curr_size); \n\n            if (mi != curr_size-1) \n            { \n                flip(arr, mi);\n                flip(arr, curr_size-1); \n            } \n        } \n        return 0; \n    }\n} "
+    },
+    {
+        "method_name": "quicksort",
+        "method_code": "class quicksort {\n \n    int partition(int arr[], int low, int high){ \n        int pivot = arr[high];  \n        int i = (low-1); \n        for (int j=low; j<high; j++) \n        { \n            if (arr[j] <= pivot) \n            { \n                i++; \n  \n                int temp = arr[i]; \n                arr[i] = arr[j]; \n                arr[j] = temp; \n            } \n        } \n  \n        int temp = arr[i+1]; \n        arr[i+1] = arr[high]; \n        arr[high] = temp; \n  \n        return i+1; \n    } \n  \n    void sort(int arr[], int low, int high){ \n        if (low < high) \n        { \n            int pi = partition(arr, low, high); \n\n            sort(arr, low, pi-1); \n            sort(arr, pi+1, high); \n        } \n    }\n}\n"
+    },
+    {
+        "method_name": "coutingsort",
+        "method_code": "public class coutingsort{  \n  public static void countingSort(int[] input, int k) { \n    int counter[] = new int[k + 1]; \n    for (int i : input) { counter[i]++; } \n    int ndx = 0; \n    for (int i = 0; i < counter.length; i++) { \n      while (0 < counter[i]) { input[ndx++] = i; \n        counter[i]--; \n      } \n    } \n  }\n}"
+    },
+    {
+        "method_name": "bubblesort",
+        "method_code": "public class bubblesort{ \n\tprivate static void bubbleSort(int vetor[]){\n\t\tboolean troca = true;\n\t\tint aux;\n\t\twhile (troca) {\n\t\t\ttroca = false;\n\t\t\tfor (int i = 0; i < vetor.length - 1; i++) {\n\t\t\t\tif (vetor[i] > vetor[i + 1]) {\n\t\t\t\t\taux = vetor[i];\n\t\t\t\t\tvetor[i] = vetor[i + 1];\n\t\t\t\t\tvetor[i + 1] = aux;\n\t\t\t\t\ttroca = true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"
+    },
+    {
+        "method_name": "linearsearch",
+        "method_code": "public class linearsearch{\n  public static int LinearSearch(int arr[]){\n    for(int i = 0; i<arr.length; i++){  \n      if(arr[i]==item){  \n        flag = i+1;  \n        break;  \n      }  \n      else{   \n        flag = 0;   \n      }\n    }  \n    if(flag != 0)  \n    {  \n        System.out.println(\"Item found at location\" + flag);  \n    }  \n    else   {\n        System.out.println(\"Item not found\");\n    }\n  }\n}"
+    },
+    {
+        "method_name": "depthfirstsearch",
+        "method_code": "public class septhfirstsearch {\n  void DFSUtil(int v,boolean visited[]) { \n    visited[v] = true; \n    System.out.print(v+\" \"); \n    \n    Iterator<Integer> i = adj[v].listIterator(); \n    while (i.hasNext()) { \n      int n = i.next(); \n      if (!visited[n]) \n        DFSUtil(n,visited); \n    } \n  } \n  void DFS() { \n    boolean visited[] = new boolean[V]; \n    for (int i=0; i<V; ++i) \n      if (visited[i] == false) \n        DFSUtil(i, visited); \n  } \n}"
+    },
+    {
+        "method_name": "shellsort",
+        "method_code": "public class shellsort{    \n    public static void shellSort(Integer[] nums) {\n        int h = 1;\n        int n = nums.length;\n        \n        while(h < n) {\n                h = h * 3 + 1;\n        }\n        \n        h = h / 3;\n        int c, j;\n        \n        while (h > 0) {\n            for (int i = h; i < n; i++) {\n                c = nums[i];\n                j = i;\n                while (j >= h && nums[j - h] > c) {\n                    nums[j] = nums[j - h];\n                    j = j - h;\n                }\n                nums[j] = c;\n            }\n            h = h / 2;\n        }\n    }\n}"
+    },
+    {
+        "method_name": "selectionsort",
+        "method_code": "public class selectionsort{\t\n    void selectionSort(int arr[]){ \n            int n = arr.length; \n    \n            for (int i = 0; i < n-1; i++) \n            { \n    \n                int min_idx = i; \n                for (int j = i+1; j < n; j++) {\n                    if (arr[j] < arr[min_idx]) {\n                        min_idx = j; \n            }\n            }\n                int temp = arr[min_idx]; \n                arr[min_idx] = arr[i]; \n                arr[i] = temp; \n            } \n    }\n}\n"
+    },
+    {
+        "method_name": "quicksort",
+        "method_code": "public class quicksort{        \n        private static void quickSort(int[] vetor, int inicio, int fim) {\n                if (inicio < fim) {\n                        int posicaoPivo = separar(vetor, inicio, fim);\n                        quickSort(vetor, inicio, posicaoPivo - 1);\n                        quickSort(vetor, posicaoPivo + 1, fim);\n                }\n        }\n        \n        private static int separar(int[] vetor, int inicio, int fim) {\n                int pivo = vetor[inicio];\n                int i = inicio + 1, f = fim;\n                while (i <= f) {\n                        if (vetor[i] <= pivo){\n                                i++;\n                        }\n                        else if (pivo < vetor[f]){\n                                f--;\n                        }\n                        else {\n                                int troca = vetor[i];\n                                vetor[i] = vetor[f];\n                                vetor[f] = troca;\n                                i++;\n                                f--;\n                        }\n                }\n                vetor[inicio] = vetor[f];\n                vetor[f] = pivo;\n                return f;\n        }\n}"
+    },
+    {
+        "method_name": "radixsort",
+        "method_code": "public class radixsort {\n  private static final int MAX_CHARS = 28;\n\n  private static void radixSort(String[] v) {\n    Queue<String> queues[] = createQueues();\n    for (int pos = maxSize(v) - 1; pos >= 0; pos--) {\n      for (int i = 0; i < v.length; i++) {\n        int q = queueNo(v[i], pos);\n        queues[q].add(v[i]);\n      }\n      restore(queues, v);\n    }\n  }\n\n  private static void restore(Queue<String>[] qs, String[] v) {\n    int contv = 0;\n    for (int q = 0; q < qs.length; q++)\n      while (qs[q].size() > 0)\n        v[contv++] = qs[q].remove();\n  }\n\n  private static Queue<String>[] createQueues() {\n    LinkedList<String>[] result = new LinkedList[MAX_CHARS];\n    for (int i = 0; i < MAX_CHARS; i++) {\n      result[i] = new LinkedList<String>();\n    }\n    return result;\n  }\n\n  private static int queueNo(String string, int pos) {\n    if (pos >= string.length()) {\n      return 0;\n    }\n    char ch = string.charAt(pos);\n    if ((ch >= 'A') && (ch <= 'Z')) {\n      return (ch - 'A' + 1);\n    }\n    else if (ch >= 'a' && ch <= 'z') {\n      return ch - 'a' + 1;\n    }\n    else {\n      return 27;\n    }\n  }\n\n  private static int maxSize(String[] v) {\n    int maxValue = v[0].length();\n\n    for (int i = 1; i < v.length; i++) {\n      if (maxValue < v[i].length()) {\n        maxValue = v[i].length();\n      }\n    }\n    return maxValue;\n  }\n}"
+    },
+    {
+        "method_name": "saddlebacksearch",
+        "method_code": "public class saddlebacksearch {  \n  private static void searchElement(int TwoDiArray[][], int row, int col, int ele) {     \n    int i = row - 1, j = 0;\n    int flag = 0;  \n      while (i >= 0 && j < col){ \n        if (TwoDiArray[i][j] == ele) {\n          System.out.println(\"Element found at index: {\"+i+\", \"+j+\"}\");\n          flag = 1;\n          break;\n        }\n        if (TwoDiArray[i][j] > ele) \n          i--;\n        else     \n          j++;\n        } \n    if(flag == 0) {\n      System.out.println(\"Element not found\");\n    }\n  } \n}"
+    },
+    {
+        "method_name": "gnomesort",
+        "method_code": "public class gnomesort{  \n  public static Integer[] gnomeSort(Integer[] array){\n    int pivout = 0;\n    int aux;\n    while(pivout<(array.length-1)){\n      if(array[pivout]>array[pivout+1]){\n        aux = array[pivout];\n        array[pivout] = array[pivout+1];\n        array[pivout+1] = aux;\n        if(pivout>0){\n          pivout-=2;\n        }\n      }\n      pivout++;\n    }\n    return array;\n  }\n}"
+    },
+    {
+        "method_name": "saddlebacksearch",
+        "method_code": "public class saddlebacksearch{  \n  static boolean saddlebackSearch(int mat[][], int m, int n, int x) { \n\n    int i = m - 1, j = 0;  \n    while (i >= 0 && j < n) { \n      if (mat[i][j] == x) \n        return true; \n      if (mat[i][j] > x) \n        i--; \n      else \n        j++; \n    } \n            \n    return false; \n  } \n}"
+    },
+    {
+        "method_name": "levenshteindistance",
+        "method_code": "public class levenshteindistance {\n \n  static int calculate(String x, String y) {\n       if (x.isEmpty()) {\n           return y.length();\n       }\n\n       if (y.isEmpty()) {\n           return x.length();\n       } \n\n       int substitution = calculate(x.substring(1), y.substring(1)) \n        + costOfSubstitution(x.charAt(0), y.charAt(0));\n       int insertion = calculate(x, y.substring(1)) + 1;\n       int deletion = calculate(x.substring(1), y) + 1;\n\n       return min(substitution, insertion, deletion);\n   }\n\n   public static int costOfSubstitution(char a, char b) {\n       return a == b ? 0 : 1;\n   }\n\n   public static int min(int... numbers) {\n       return Arrays.stream(numbers)\n         .min().orElse(Integer.MAX_VALUE);\n   }\n}"
+    },
+    {
+        "method_name": "ternarysearch",
+        "method_code": "public class ternarysearch{\n  public static int ternarySearch(int n, int[] arr, int lowerIndex, int upperIndex) {\n    if(n < arr[lowerIndex] || n > arr[upperIndex]) return -1;\n\n    int median = (upperIndex - lowerIndex) / 3;\n    int med1 = lowerIndex + median;\n    int med2 = upperIndex - median;\n\n    if(arr[med1] == n) return med1;\n    if(arr[med2] == n) return med2;\n\n    if(arr[med1] < n) return ternarySearch(n, arr, med1+1, upperIndex);\n    if(arr[med2] > n) return ternarySearch(n, arr, lowerIndex, med2-1);\n\n    return -1;\n  }\n}"
+    },
+    {
+        "method_name": "longestincreasingsubsequence",
+        "method_code": "public class longestincreasingsubsequence { \n   static int max_ref; \n   static int _lis(int arr[], int n) { \n       if (n == 1) \n           return 1; \n  \n       int res, max_ending_here = 1; \n\n        for (int i = 1; i < n; i++) { \n            res = _lis(arr, i); \n            if (arr[i-1] < arr[n-1] && res + 1 > max_ending_here) \n                max_ending_here = res + 1; \n        } \n\n        if (max_ref < max_ending_here) \n           max_ref = max_ending_here; \n  \n        return max_ending_here; \n   } \n  \n    static int lis(int arr[], int n) { \n        max_ref = 1; \n  \n        _lis( arr, n); \n  \n        return max_ref; \n    } \n}"
+    },
+    {
+        "method_name": "longestpathindirectedacyclicgraph",
+        "method_code": "public class longestpathindirectedacyclicgraph {\n\n\tpublic static void find(int[][] graph, int v) {\n\t\tStack<Integer> stack = TopologicalSorting.sort(graph);\n\t\tint[] dis = new int[graph.length];\n\t\tArrays.fill(dis, Integer.MIN_VALUE);\n\t\tdis[v] = 0; \n\t\twhile (!stack.isEmpty()) {\n\t\t\tint ver = stack.pop();\n\t\t\tif (dis[ver] != Integer.MIN_VALUE) {\n\t\t\t\tfor (int i = 0; i < graph.length; i++) {\n\t\t\t\t\tif (graph[ver][i] != 0) {\n\t\t\t\t\t\tif (dis[i] < graph[ver][i] + dis[ver]) {\n\t\t\t\t\t\t\tdis[i] = graph[ver][i] + dis[ver];\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tfor (int d : dis)\n\t\t\tSystem.out.print(d + \" \");\n\t}\n}"
+    },
+    {
+        "method_name": "depthfirstsearch",
+        "method_code": "public class depthfirstsearch {\n  void DFSUtil(int v,boolean visited[]) { \n    visited[v] = true; \n    System.out.print(v+\" \"); \n    \n    Iterator<Integer> i = adj[v].listIterator(); \n    while (i.hasNext()) { \n      int n = i.next(); \n      if (!visited[n]) \n        DFSUtil(n, visited); \n    } \n  } \n\n  void DFS(int v) { \n    boolean visited[] = new boolean[V];  \n    DFSUtil(v, visited); \n  } \n}"
+    },
+    {
+        "method_name": "fordfulkerson",
+        "method_code": "public class fordfulkerson{  \n  public int maxFlow(int graph[][], int vertexS, int vertexT) {\n    int maxFlow = 0;\n    int parent[] = new int[vertexCount];\t\n    int vertexU=0;\t\n    int vertexV =0;\n\n    int residualGraph[][] = new int[vertexCount][vertexCount];\n    for (vertexU = 0; vertexU < vertexCount; vertexU++){\t\t\n      for (vertexV = 0; vertexV < vertexCount; vertexV++){\n        residualGraph[vertexU][vertexV] = graph[vertexU][vertexV];\n      }\n    }\n\n    while (bfs(residualGraph, vertexS, vertexT, parent)) {\t\t\n      String pathString = \"\";\t\t\n\n      int bottleneckFlow = Integer.MAX_VALUE;\t\n      for (vertexV=vertexT; vertexV != vertexS; vertexV=parent[vertexV]) {\t\t\n        vertexU = parent[vertexV];\t\t\n        bottleneckFlow = Math.min(bottleneckFlow, residualGraph[vertexU][vertexV]);\t\t\n\n        pathString = \" --> \"+arrayIndexStringEquivalents[vertexV]+ pathString;\n      }\n      pathString= \"S\"+pathString;\t\t\n      System.out.println(\"Augmentation path \\n\"+pathString);\n      System.out.println(\"bottleneck (min flow on path added to max flow) = \"+bottleneckFlow +\"\\n\");\n\n      for (vertexV=vertexT; vertexV != vertexS; vertexV=parent[vertexV]) {\n        vertexU = parent[vertexV];\n        residualGraph[vertexU][vertexV] -= bottleneckFlow;\t\n        residualGraph[vertexV][vertexU] += bottleneckFlow;\t\t\n      }\n\n      maxFlow += bottleneckFlow;\t\t\n    }\n\n    return maxFlow;\n  }\n}"
+    },
+    {
+        "method_name": "matrixchainmultiplication",
+        "method_code": "public class matrixchainmultiplication{  \n  static int MatrixChainOrder(int p[], int i, int j) { \n    if (i == j) \n      return 0; \n    \n    int min = Integer.MAX_VALUE; \n\n    for (int k = i; k < j; k++) { \n      int count = MatrixChainOrder(p, i, k) +  \n                  MatrixChainOrder(p, k + 1, j) +  \n                  p[i - 1] * p[k] * p[j]; \n    \n      if (count < min) \n        min = count; \n    } \n    return min; \n  } \n}"
+    },
+    {
+        "method_name": "longestcommonsubsequence",
+        "method_code": "public class longestcommonsubsequence { \n  \n  int lcs(char[] X, char[] Y, int m, int n) \n  { \n      if (m == 0 || n == 0) \n          return 0; \n      if (X[m - 1] == Y[n - 1]) \n          return 1 + lcs(X, Y, m - 1, n - 1); \n      else\n          return max(lcs(X, Y, m, n - 1), lcs(X, Y, m - 1, n)); \n  } \n\n  int max(int a, int b) \n  { \n      return (a > b) ? a : b; \n  } \n}"
+    },
+    {
+        "method_name": "fordfulkerson",
+        "method_code": "public class fordfulkerson{  \n  int fordFulkerson(int graph[V][V], int s, int t) { \n    int u, v;   \n    int rGraph[V][V]; \n    for (u = 0; u < V; u++) \n      for (v = 0; v < V; v++) \n        rGraph[u][v] = graph[u][v]; \n    int parent[V]; \n    int max_flow = 0;  \n    while (bfs(rGraph, s, t, parent)) \n    { \n      int path_flow = INT_MAX; \n      for (v=t; v!=s; v=parent[v]) { \n        u = parent[v]; \n        path_flow = min(path_flow, rGraph[u][v]); \n      } \n      for (v=t; v != s; v=parent[v]) { \n        u = parent[v]; \n        rGraph[u][v] -= path_flow; \n        rGraph[v][u] += path_flow; \n      } \n      max_flow += path_flow; \n    } \n    return max_flow; \n  } \n}"
+    },
+    {
+        "method_name": "jumpsearch",
+        "method_code": "public class jumpsearch{    \n    public static int jumpSearch(int[] arr, int x) { \n        int n = arr.length; \n        int step = (int)Math.floor(Math.sqrt(n)); \n        int prev = 0; \n        while (arr[Math.min(step, n)-1] < x){ \n            prev = step; \n            step += (int)Math.floor(Math.sqrt(n)); \n            if (prev >= n) \n                return -1; \n        } \n        while (arr[prev] < x) { \n            prev++; \n            if (prev == Math.min(step, n)) \n                return -1; \n        } \n        if (arr[prev] == x) \n            return prev; \n    \n        return -1; \n    } \n}"
+    },
+    {
+        "method_name": "longestcommonsubsequence",
+        "method_code": "public class longestcommonsubsequence{\t\n\tpublic static int getLongestCommonSubsequence(String a, String b){\n\t\tint m = a.length();\n\t\tint n = b.length();\n\t\tint[][] dp = new int[m+1][n+1];\n\t\n\t\tfor(int i=0; i<=m; i++){\n\t\t\tfor(int j=0; j<=n; j++){\n\t\t\t\tif(i==0 || j==0){\n\t\t\t\t\tdp[i][j]=0;\n\t\t\t\t}else if(a.charAt(i-1)==b.charAt(j-1)){\n\t\t\t\t\tdp[i][j] = 1 + dp[i-1][j-1];\n\t\t\t\t}else{\n\t\t\t\t\tdp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\n\t\treturn dp[m][n];\n\t}\n}"
+    }
+]
