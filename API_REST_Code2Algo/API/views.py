@@ -13,7 +13,7 @@ from .serializer import MethodsSerializer
 
 INPUT_FILE = "/home/joaorura/PycharmProjects/API_REST_Code2Algo/external_projects/code2vec/Input.java"
 COMMAND = [
-    "python3",
+    "python3.6",
     "/home/joaorura/PycharmProjects/API_REST_Code2Algo/external_projects/code2vec/code2vec.py",
     "--load", "/home/joaorura/PycharmProjects/API_REST_Code2Algo/external_projects/code2vec/models/theModel",
     "--predict"
@@ -30,6 +30,9 @@ class MethodsViewSet(viewsets.ModelViewSet):
         count_dict = {}
 
         for out in list_out:
+            if out == '':
+                continue
+
             try:
                 value = re.findall("Original name:[^!]*Attention:", out)[0]
             except IndexError:
@@ -58,6 +61,10 @@ class MethodsViewSet(viewsets.ModelViewSet):
                 return tuple([original_name])
 
         count_list = []
+
+        if len(count_dict) == 0:
+            return []
+
         for i in count_dict:
             count_list.append((count_dict[i], i))
 
@@ -81,6 +88,7 @@ class MethodsViewSet(viewsets.ModelViewSet):
                 process = subprocess.Popen(COMMAND, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 out, err = process.communicate()
                 list_out.append(out.decode("utf-8"))
+                print(out.decode('utf-8'), err.decode('utf-8'))
 
             answer = self.process_out(list_out)
 
