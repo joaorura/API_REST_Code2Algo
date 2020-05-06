@@ -20,7 +20,7 @@ class BuildDatabase:
 
 def main():
     build_database = BuildDatabase("http://127.0.0.1:8000/methods/")
-    build_database.post_list_of_json("./files/methods.json")
+    build_database.post_list_of_json("./files/recommender_database.json")
 
 
 if __name__ == '__main__':
