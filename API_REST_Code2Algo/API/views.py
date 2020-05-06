@@ -88,7 +88,6 @@ class MethodsViewSet(viewsets.ModelViewSet):
                 process = subprocess.Popen(COMMAND, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 out, err = process.communicate()
                 list_out.append(out.decode("utf-8"))
-                print(out.decode('utf-8'), err.decode('utf-8'))
 
             answer = self.process_out(list_out)
 
