@@ -42,7 +42,6 @@ class MethodsViewSet(viewsets.ModelViewSet):
             value = value.replace("[", "").replace("]", "").replace("'", "").replace(", ", "")
             value = value.split("\n")
 
-            original_name = value[0].replace("|", "")
             del value[0]
 
             for i in range(0, len(value)):
@@ -56,9 +55,6 @@ class MethodsViewSet(viewsets.ModelViewSet):
                     count_dict[name_code] = 0
 
                 count_dict[name_code] += i
-
-            if original_name in count_dict:
-                return tuple([original_name])
 
         count_list = []
 
@@ -83,7 +79,7 @@ class MethodsViewSet(viewsets.ModelViewSet):
             list_out = []
             for i in methods:
                 with open(INPUT_FILE, 'w') as file:
-                    file.write("public class Test {\n" + i + "\n}\n")
+                    file.write(i)
 
                 process = subprocess.Popen(COMMAND, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 out, err = process.communicate()
